@@ -1,3 +1,15 @@
 [submodule "lib/forge-std"]
 	path = lib/forge-std
 	url = https://github.com/foundry-rs/forge-std
+[submodule "tokenbridge-contracts"]
+	path = tokenbridge-contracts
+	url = https://github.com/gnosischain/tokenbridge-contracts
+[submodule "lib/openzeppelin-solidity"]
+	path = lib/openzeppelin-solidity
+	url = https://github.com/OpenZeppelin/openzeppelin-solidity
+[submodule "omnibridge"]
+	path = omnibridge
+	url = https://github.com/gnosischain/omnibridge.git
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
+	url = https://github.com/Openzeppelin/openzeppelin-contracts

@@ -1,6 +1,19 @@
 [profile.default]
-src = "src"
+src = "tokenbridge-contracts/contracts"
 out = "out"
 libs = ["lib"]
+remappings = [
+    'openzeppelin-solidity/=lib/openzeppelin-solidity/',
+    '@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/',
+    'forge-std/=lib/forge-std/src/'
+]
+
+[rpc_endpoints]
+sepolia = "${SEPOLIA_RPC_URL}"
+chiado = "${CHIADO_RPC_URL}"
+
+[etherscan]
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
+chiado = { key = "${BLOCKSCOUT_API_KEY}" }
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
