@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 source .env
 
+
 echo "Deploying Foreign AMB.......🤘🏻"
 FOREIGN_VALIDATOR_PROXY=$(forge create --rpc-url $LOCAL_RPC_URL --private-key $ANVIL_PRIV_KEY tokenbridge-contracts/contracts/upgradeability/EternalStorageProxy.sol:EternalStorageProxy --json)
 FOREIGN_VALIDATOR_PROXY_ADDRESS=$(jq -r '.deployedTo' <<< "$FOREIGN_VALIDATOR_PROXY")
