@@ -1,66 +1,21 @@
-## Foundry
+# Deployment script for tokenbridge-contracts
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+This is a deployment script for tokenbridge-contract & omnibridge using Foundry `forge create` cli.
 
-Foundry consists of:
-
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+## Version of packages
+```
+forge install Openzeppelin/openzeppelin-solidity@v1.12.0     
+forge install Openzeppelin/openzeppelin-contracts@v"3.2.2-solc-0.7"
 ```
 
-### Test
+# xDAI bridge
 
-```shell
-$ forge test
-```
+1. In Foreign xDAI bridge, DAI token is hardcoded in CompoundConnector.sol::daiToken(), the default value is DAI on Ethereum(0x6B175474E89094C44Da98b954EedeAC495271d0F). You'll need to modify the address according to the network.
+2. The new xDAI bridge has to be registered in the blockReward contract to 'mint' new xDAI. (Another option is to deploy new BlockRewardAura contract and  register in the blockchain client code (i.e. [Nethermind](https://github.com/NethermindEth/nethermind/blob/master/src/Nethermind/Chains/chiado.json#L28)) )
 
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+# FAQ
+1. Why not use Foundry script?
+    Most tokenbridge-contracts use Solidity 0.4.24, while Foundry script uses at least 0.6.0. Using Foundry script will give compiler error.
+2. Why there is posdao-contracts?
+    Gnosis Chain is previously PoA Network, which uses PoSDAO consensus instead of the currently used PoS(Proof of Stake). In PosDAO, a set of permissioned validators take turn to submit the block and the validator set is changed periodically. All the operation logic can be found in `/posdao-contracts`. 
+    In production, only `BlockRewardAuRa.sol` is still being called by Home xDAI bridge. 
